@@ -61,12 +61,16 @@ let nombre2 = prompt("Ingrese nombre de Jugador 2:")
 let jugador1 = prompt("Jugador 1 ingrese piedra/papel/tijera:")
 let jugador2 = prompt("Jugador 2 ingrese piedra/papel/tijera:")
 
-if ((jugador1 != "piedra" || jugador1 != "papel" || jugador1 != "tijera") || (jugador2 != "piedra" || jugador2 != "papel" || jugador2 != "tijera")) {
+if (jugador1 == "" || jugador2 == "") {
     alert("datos ingresados incorrectos")
+}
+else if((jugador1 == "piedra" && jugador2 == "piedra") || (jugador1 == "papel" && jugador2 == "papel") || (jugador1 == "tijera" && jugador2 == "tijera")){
+    alert(`empate entre ${nombre1} y ${nombre2}`)
 }
 else if ((jugador1 == "tijera" && jugador2 == "papel") || (jugador1 == "papel" && jugador2 == "piedra") || (jugador1 == "piedra" && jugador2 == "tijera")) {
         alert(`El Ganador es: ${nombre1}`)
-}else{
+}
+else{
     alert(`El Ganador es: ${nombre2}`)
 }
 
@@ -83,7 +87,10 @@ for(i=2;i<n1;i++){
     }
 }
     
-if(n1 === 0 || n1 === 1){
+if (isNaN(n1)) {
+    alert("Error no ha ingresado un Número")
+}
+else if (n1 === 0 || n1 === 1){
     alert("El número "+n1+" no es primo")
 }
 else if(primo==true){
