@@ -104,8 +104,6 @@
 
 // DESAFIO: SIMULADOR INTERACTIVO (seleccionar productos, medios de paso, descuentos, intereses)
 
-
-
 // let costoProducto = 0;
 // let total = 0;
 // let productos = "";
@@ -215,7 +213,6 @@
 // }
 // seleccionarProductos();
 
-
 // function mediosDePago() {
 //     elegirPago = prompt ("desea abonar con:\n1. Efectivo\n2. Tarjeta de Débito\n3. Tarjeta de Crédito")
     
@@ -267,110 +264,155 @@
 
 // INCOORPORANDO ARRAYS Y PRIMER PRE-ENTREGA DE PROYECTO FINAL
 
+// class producto {
+//     constructor(id, componente, nombre, precio){
+//         this.id = id;
+//         this.componente = componente;
+//         this.nombre = nombre;
+//         this.precio = precio;
+//     }
+// }
+
+// const p1 = new producto (1, "motherboard", "asus B450", 20000);
+// const p2 = new producto (2, "procesador", "ryzen 5600x", 50000);
+// const p3 = new producto (3, "memoria ram", "g-skill trident z 16gb", 25000);
+// const p4 = new producto (4, "disco rigido", "NVMe samsung 970 evo 1tb", 45000);
+// const p5 = new producto (5, "placa video", "asus RTX 3080ti", 330000);
+
+// const productos = [];
+
+// productos.push (p1);
+// productos.push (p2);
+// productos.push (p3);
+// productos.push (p4);
+// productos.push (p5);
+
+// const carrito = [];
+
+
+// function addToCart (){
+
+// let productoId = Number(prompt (`Seleccione el Numero del producto:
+// 1. Motherboard - asus - B450 - $20000
+// 2. Procesador - ryzen 5600x - $50000
+// 3. Memoria ram - g-skill trident z 16gb - $25000
+// 4. Disco rigido - NVMe samsung 970 evo 1tb - $45000
+// 5. Placa de video - asus RTX 3080ti - $330000
+// 6. Ir al CARRITO`))
+
+
+// while (productoId != 6) {
+    
+//     let cantidad = Number(prompt("seleccione cantidad de dicho producto"))
+    
+//     let check = carrito.some(product => product.id===productoId)
+//     if (check) {
+//         let producto = productos.find(product => product.id===productoId)
+//         producto.cantidad += cantidad
+//         producto.total = producto.precio * producto.cantidad
+
+//     }else{
+
+//     let producto = productos.find(product => product.id===productoId)
+//     producto.cantidad = cantidad
+//     producto.total = producto.precio * cantidad
+//     carrito.push(producto)
+// }
+
+// productoId = Number(prompt (`seleccione producto:
+// 1. Motherboard - asus - B450 - $20000
+// 2. Procesador - ryzen 5600x - $50000
+// 3. Memoria ram - g-skill trident z 16gb - $25000
+// 4. Disco rigido - NVMe samsung 970 evo 1tb - $45000
+// 5. Placa de video - asus RTX 3080ti - $330000
+// 6. Ir al CARRO de compras`))
+// }
+
+// let eleccion = Number(prompt(`seleccione: 
+// 1. Si desea ir al CARRO de compras y conocer TOTAL
+// 2. Si desea agregar mas producto a su CARRO
+// 3. Si quiere VACIAR el carrito y volver a elegir productos
+// 4. Si desea SALIR de la página`))
+
+
+// if (eleccion == 1) {
+//     console.log(carrito);
+//     calcularTotal(carrito);
+//     console.log(`su total va a ser: $${calcularTotal(carrito)}`)
+//     finalizarCompra ();
+// } else if (eleccion == 2){
+//     addToCart();
+// } else if (eleccion == 3){
+//     carrito.splice(0, carrito.length)
+//     console.log(carrito);
+//     addToCart();
+// } else if (eleccion == 4){
+//     alert ("gracias por visitarnos")
+// }
+// }
+
+// addToCart();
+
+// function calcularTotal(carrito){
+//     let total = 0;
+//     carrito.forEach(producto=> {
+//         total += producto.total
+//     })
+//     return total
+// }
+
+// function finalizarCompra (){
+//     let compra = prompt(`Para finalizar la compra oprima 1 para seguir comprando oprima 2`)
+//     if (compra == 1) {
+//         alert("MUCHAS GRACIAS POR SU COMPRA")
+//     } else {
+//         addToCart();
+//     }
+// }
+
+//incoorporando DOM
+
 class producto {
-    constructor(id, componente, nombre, precio){
+    constructor(id, componente, img, nombre, precio){
         this.id = id;
         this.componente = componente;
+        this.img = img;
         this.nombre = nombre;
         this.precio = precio;
     }
 }
 
-const p1 = new producto (1, "motherboard", "asus B450", 20000);
-const p2 = new producto (2, "procesador", "ryzen 5600x", 50000);
-const p3 = new producto (3, "memoria ram", "g-skill trident z 16gb", 25000);
-const p4 = new producto (4, "disco rigido", "NVMe samsung 970 evo 1tb", 45000);
-const p5 = new producto (5, "placa video", "asus RTX 3080ti", 330000);
+const p1 = new producto (1, "Motherboard","img/mother.png", "asus B450", 20000);
+const p2 = new producto (2, "Procesador","img/procesador.png", "ryzen 5600x", 50000);
+const p3 = new producto (3, "Memoria ram","img/ram.png", "g-skill trident z 16gb", 25000);
+const p4 = new producto (4, "Disco rigido","img/discosolido.png", "NVMe samsung 970 evo 1tb", 45000);
+const p5 = new producto (5, "Placa video","img/placadevideo.png", "asus RTX 3080ti", 330000);
 
 const productos = [];
 
-productos.push (p1);
-productos.push (p2);
-productos.push (p3);
-productos.push (p4);
-productos.push (p5);
-
-const carrito = [];
+productos.push (p1, p2, p3, p4, p5);
 
 
-function addToCart (){
-
-let productoId = Number(prompt (`Seleccione el Numero del producto:
-1. Motherboard - asus - B450 - $20000
-2. Procesador - ryzen 5600x - $50000
-3. Memoria ram - g-skill trident z 16gb - $25000
-4. Disco rigido - NVMe samsung 970 evo 1tb - $45000
-5. Placa de video - asus RTX 3080ti - $330000
-6. Ir al CARRITO`))
-
-
-while (productoId != 6) {
+const mostrarProductos = (productos) => {
+    const seccionProductos = document.getElementById("seccion-productos");
+    productos.forEach (producto => {
+        const card = document.createElement ('card')
+        card.innerHTML += `<div class="card" style="width: 18rem;">
+        <img src="${producto.img}" class="card-img-top" alt="...">
+        <div class="card-body">
+        <h5 class="card-title">${producto.componente}: ${producto.nombre}</h5>
+        <p class="card-text">$${producto.precio}</p>
+        <a href="#" class="btn btn-primary" id="button${producto.id}">Sumar al Carrito</a>
+        </div>
+    </div>`
     
-    let cantidad = Number(prompt("seleccione cantidad de dicho producto"))
-    
-    let check = carrito.some(product => product.id===productoId)
-    if (check == true) {
-        let producto = productos.find(product => product.id===productoId)
-        producto.cantidad += cantidad
-        producto.total = producto.precio * producto.cantidad
+    seccionProductos.appendChild(card);
 
-    }else{
-
-    let producto = productos.find(product => product.id===productoId)
-    producto.cantidad = cantidad
-    producto.total = producto.precio * cantidad
-    carrito.push(producto)
-}
-
-productoId = Number(prompt (`seleccione producto:
-1. Motherboard - asus - B450 - $20000
-2. Procesador - ryzen 5600x - $50000
-3. Memoria ram - g-skill trident z 16gb - $25000
-4. Disco rigido - NVMe samsung 970 evo 1tb - $45000
-5. Placa de video - asus RTX 3080ti - $330000
-6. Ir al CARRO de compras`))
-}
-
-let eleccion = Number(prompt(`seleccione: 
-1. Si desea ir al CARRO de compras y conocer TOTAL
-2. Si desea agregar mas producto a su CARRO
-3. Si quiere VACIAR el carrito y volver a elegir productos
-4. Si desea SALIR de la página`))
-
-
-if (eleccion == 1) {
-    console.log(carrito);
-    calcularTotal(carrito);
-    console.log(`su total va a ser: $${calcularTotal(carrito)}`)
-    finalizarCompra ();
-} else if (eleccion == 2){
-    addToCart();
-} else if (eleccion == 3){
-    carrito.splice(0, carrito.length)
-    console.log(carrito);
-    addToCart();
-} else if (eleccion == 4){
-    alert ("gracias por visitarnos")
-}
-
-}
-
-addToCart();
-
-function calcularTotal(carrito){
-    let total = 0;
-    carrito.forEach(producto=> {
-        total += producto.total
+    const button = document.getElementById(`button${producto.id}`)
+    button.addEventListener('click', () => {
+        alert (`agregaste ${producto.nombre}`)
     })
-    return total
+    });
 }
 
-
-function finalizarCompra (){
-    let compra = prompt(`Para finalizar la compra oprima 1 para seguir comprando oprima 2`)
-    if (compra == 1) {
-        alert("MUCHAS GRACIAS POR SU COMPRA")
-    } else {
-        addToCart();
-    }
-} 
+mostrarProductos(productos);
