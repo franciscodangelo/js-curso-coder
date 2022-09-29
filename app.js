@@ -451,188 +451,185 @@
 //CONSTRUCTOR 
 
 class producto {
-  constructor(id, componente, img, nombre, precio) {
-      this.id = id;
-      this.componente = componente;
-      this.img = img;
-      this.nombre = nombre;
-      this.precio = precio;
-  }
-  }
+    constructor(id, componente, img, nombre, precio) {
+        this.id = id;
+        this.componente = componente;
+        this.img = img;
+        this.nombre = nombre;
+        this.precio = precio;
+}
+}
+
+const p1 = new producto(1, "Motherboard", "img/mother.png", "asus B450", 20000);
+const p2 = new producto(2, "Procesador", "img/procesador.png", "ryzen 5600x", 50000);
+const p3 = new producto(3, "Memoria ram", "img/ram.png", "g-skill trident z 16gb", 25000);
+const p4 = new producto(4, "Disco rigido", "img/discosolido.png", "NVMe samsung 970 evo 1tb", 45000);
+const p5 = new producto(5, "Placa video", "img/placadevideo.png", "asus RTX 3080ti", 330000);
+
+
+//CONSTRUCTOR - AGREGADO DE ELEMENTO CANTIDAD - CUANDO PUSHEAMOS AL CARRITO 
+
+class ProductoEnCarrito {
+    constructor(prod) {
+        this.producto = prod;
+        this.cantidad = 1;
+}
+}
+
+//ARRAY DE OBJETOS ("BASE DE DATOS")
+
+const productos = [];
+    productos.push(p1, p2, p3, p4, p5);
+
+
+//DECLARAMOS ARRAY DE CARRITO VACIO
+
+let carrito = [];
+
+
+//MOSTRAR PRODUCTOS EN HTML 
+
+const mostrarProductos = (productos) => {
+const seccionProductos = document.getElementById("seccion-productos");
+    productos.forEach((producto) => {
+        const card = document.createElement("card");
+        card.innerHTML += `<div class="card border border-success" style="width: 18rem;">
+            <img src="${producto.img}" class="card-img-top" alt="...">
+            <div class="card-body">
+            <h5 class="card-title">${producto.componente}: ${producto.nombre}</h5>
+            <p class="card-text">$${producto.precio}</p>
+            <a class="btn btn-success" id="button${producto.id}">Agregar al Carrito</a>
+            </div>
+        </div>`;
+
+        seccionProductos.appendChild(card);
+
+//EVENTO CLICK PARA CARGAR AL CARRITO CON CONDICION (SI EXISTE EN CARRITO SOLO CARGA + UNIDAD DE PRODUCTO SINO PUSHEA PRODUCTO A CARRITO)
+
+const button = document.getElementById(`button${producto.id}`);
+
+        button.addEventListener("click", () => {
+        const index = carrito.findIndex((p) => p.producto.id === producto.id);
+        if (index !== -1) {
+            const p = carrito[index];
+            productoAdd(p);
+            addLocalStorage();
+            mostrarCarrito();
+            return;
+}
+
+const newProduct = new ProductoEnCarrito(producto);
+carrito.push(newProduct);
+
+addLocalStorage();
+mostrarCarrito();
+
+});
+});
+};
+
+
+//FUNCIONES
+
+//funcion para mostrar el carrito con totales parciales por producto - total general - boton para vaciar producto
+
+function mostrarCarrito() {
+const section = document.getElementById("seccion-carrito");
+section.innerHTML = "";
   
-  const p1 = new producto(1, "Motherboard", "img/mother.png", "asus B450", 20000);
-  const p2 = new producto(2, "Procesador", "img/procesador.png", "ryzen 5600x", 50000);
-  const p3 = new producto(3, "Memoria ram", "img/ram.png", "g-skill trident z 16gb", 25000);
-  const p4 = new producto(4, "Disco rigido", "img/discosolido.png", "NVMe samsung 970 evo 1tb", 45000);
-  const p5 = new producto(5, "Placa video", "img/placadevideo.png", "asus RTX 3080ti", 330000);
-  
-  
-  //CONSTRUCTOR - AGREGADO DE ELEMENTO CANTIDAD - CUANDO PUSHEAMOS AL CARRITO 
-  
-  class ProductoEnCarrito {
-  constructor(prod) {
-      this.producto = prod;
-      this.cantidad = 1;
-  }
-  }
-  
-  
-  //ARRAY DE OBJETOS ("BASE DE DATOS")
-  
-  const productos = [];
-  productos.push(p1, p2, p3, p4, p5);
-  
-  
-  //DECLARAMOS ARRAY DE CARRITO VACIO
-  
-  let carrito = [];
-  
-  
-  //MOSTRAR PRODUCTOS EN HTML 
-  
-  const mostrarProductos = (productos) => {
-  const seccionProductos = document.getElementById("seccion-productos");
-  productos.forEach((producto) => {
-      const card = document.createElement("card");
-      card.innerHTML += `<div class="card border border-success" style="width: 18rem;">
-          <img src="${producto.img}" class="card-img-top" alt="...">
-          <div class="card-body">
-          <h5 class="card-title">${producto.componente}: ${producto.nombre}</h5>
-          <p class="card-text">$${producto.precio}</p>
-          <a class="btn btn-success" id="button${producto.id}">Agregar al Carrito</a>
-          </div>
-      </div>`;
-  
-      seccionProductos.appendChild(card);
-  
-  //EVENTO CLICK PARA CARGAR AL CARRITO CON CONDICION (SI EXISTE EN CARRITO SOLO CARGA + UNIDAD DE PRODUCTO SINO PUSHEA PRODUCTO A CARRITO)
-  
-  const button = document.getElementById(`button${producto.id}`);
-  
-      button.addEventListener("click", () => {
-      const index = carrito.findIndex((p) => p.producto.id === producto.id);
-      if (index !== -1) {
-          const p = carrito[index];
-          productoAdd(p);
-          mostrarCarrito();
-          return;
-  }
-  
-  const newProduct = new ProductoEnCarrito(producto);
-  carrito.push(newProduct);
-  
-  
-  mostrarCarrito();
-  
-  });
-  });
-  };
-  
-  
-  //FUNCIONES
-  
-  //funcion para mostrar el carrito con totales parciales por producto - total general - boton para vaciar producto
-  
-  function mostrarCarrito() {
-  const section = document.getElementById("seccion-carrito");
-  section.innerHTML = "";
-  
-  let total = 0;
-  carrito.forEach((p) => {
+let total = 0;
+carrito.forEach((p) => {
       total += p.producto.precio * p.cantidad;
-      section.innerHTML += `
-          <div>
+        section.innerHTML += `
+            <div>
               <p>${p.cantidad} x ${p.producto.nombre}: $${p.producto.precio * p.cantidad}</p>
-              
-              <button class="carrito-add-one" id="buttonMas${p.producto.id}">+</button>
-              <button class="carrito-remove-one" id="buttonMenos${p.producto.id}">-</button>
-  
-          </div>
-          `;
-          
-          const buttonMa = document.getElementById(`buttonMas${p.producto.id}`);
-          buttonMa.addEventListener("click", () => {
-              sumarUnoAProducto(`${p.producto.id}`);
-          });
-          
-          const buttonMe = document.getElementById(`buttonMenos${p.producto.id}`);
-          buttonMe.addEventListener("click", () => {
-              restarUnoAProducto(`${p.producto.id}`);
-          });
-  
-  });
-  
-  
-  
-  section.innerHTML += `<p>Total: ${total}</p>`;
-  section.innerHTML += `<a class="btn btn-danger" id="buttonVaciar">vaciar carrito</a>`
-  
-  const buttonV = document.querySelector('#buttonVaciar')
-  buttonV.addEventListener("click", () => {
-      vaciarCarrito();
-      });
-  
-  }
-  
-  
-  //FUNCION VACIAR EL CARRITO DE COMPRA
-  
-  function vaciarCarrito() {
-  carrito = [];
-  mostrarCarrito();
-  }
-  
-  
-  //FUNCION PARA AGREGAR UNA UNIDAD DE PRODUCTO
-  
-  function productoAdd(p) {
-      p.cantidad += 1;
-  }
-  
-  
-  //FUNCION PARA QUITAR UNA UNIDAD DE PRODUCTO
-  
-  function subtract(p) {
-      if (p.cantidad == 0) {
-      return;
-      }
-      p.cantidad -= 1;
-  }
-  
-  
-  //FUNCION PARA AGREGAR UNIDAD CON CHEQUEO DE ID DE PRODUCTO
-  
-  function sumarUnoAProducto(id) {
-      const index = carrito.findIndex((p) => p.producto.id === id);
-      const producto = carrito[index];
-      
-      productoAdd(producto);
-      mostrarCarrito();
-  }
-  
-  
-  //FUNCION PARA QUITAR UNIDAD CON CHEQUEO DE ID DE PRODUCTO
-  
-  function restarUnoAProducto(id) {
-      const index = carrito.findIndex((p) => p.producto.id === id);
-      const producto = carrito[index];
-      
-      subtract(producto);
-      if (producto.cantidad == 0) {
-          carrito = carrito.filter((p) => p.producto.id !== id);
-      }
-      
-      mostrarCarrito();
-  }
-  
-  mostrarProductos(productos);
-  
-  
-  // {/* <button class="carrito-add-one" onclick="sumarUnoAProducto(${
-  //                 p.producto.id
-  //             })">+</button>
-  //             <button class="carrito-remove-one" onclick="restarUnoAProducto(${
-  //                 p.producto.id
-  //             })">-</button> */}
-  
-  
+
+            <button class="carrito-add-one" onclick="sumarUnoAProducto(${p.producto.id})">+</button>
+            <button class="carrito-remove-one" onclick="restarUnoAProducto(${p.producto.id})">-</button>
+
+            </div>
+            `;
+            addLocalStorage();
+
+});
+
+section.innerHTML += `<p>Total: ${total}</p>`;
+section.innerHTML += `<a class="btn btn-danger" id="buttonVaciar">vaciar carrito</a>`
+
+const buttonV = document.querySelector('#buttonVaciar')
+buttonV.addEventListener("click", () => {
+    vaciarCarrito();
+    addLocalStorage();
+});
+
+}
+
+
+//FUNCION VACIAR EL CARRITO DE COMPRA
+
+function vaciarCarrito() {
+    carrito = [];
+    mostrarCarrito();
+}
+
+
+//FUNCION PARA AGREGAR UNA UNIDAD DE PRODUCTO
+
+function productoAdd(p) {
+        p.cantidad += 1;
+}
+
+
+//FUNCION PARA QUITAR UNA UNIDAD DE PRODUCTO
+
+function subtract(p) {
+        if (p.cantidad == 0) {
+        return;
+        }
+        p.cantidad -= 1;
+}
+
+
+//FUNCION PARA AGREGAR UNIDAD CON CHEQUEO DE ID DE PRODUCTO
+
+function sumarUnoAProducto(id) {
+    const index = carrito.findIndex((p) => p.producto.id === id);
+    const producto = carrito[index];
+
+    productoAdd(producto);
+    mostrarCarrito();
+}
+
+
+//FUNCION PARA QUITAR UNIDAD CON CHEQUEO DE ID DE PRODUCTO
+
+function restarUnoAProducto(id) {
+    const index = carrito.findIndex((p) => p.producto.id === id);
+    const producto = carrito[index];
+
+    subtract(producto);
+        if (producto.cantidad == 0) {
+            carrito = carrito.filter((p) => p.producto.id !== id);
+}
+
+mostrarCarrito();
+}
+
+//FUNCIONES LOCAL STORAGE (JSON)
+function addLocalStorage(){
+    const carritoStr = JSON.stringify(carrito)
+    localStorage.setItem("carrito", carritoStr)
+}
+
+function traerDeLocal(){
+    const carroVuelta = localStorage.getItem("carrito")
+    carrito = JSON.parse(carroVuelta);
+    mostrarCarrito();
+}
+
+
+mostrarProductos(productos);
+traerDeLocal();
+
+
+
