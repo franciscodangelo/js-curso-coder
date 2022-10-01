@@ -536,7 +536,8 @@ mostrarCarrito();
 function mostrarCarrito() {
 const section = document.getElementById("seccion-carrito");
 section.innerHTML = "";
-  
+
+
 let total = 0;
 carrito.forEach((p) => {
       total += p.producto.precio * p.cantidad;
