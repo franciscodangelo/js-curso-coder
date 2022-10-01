@@ -565,7 +565,6 @@ buttonV.addEventListener("click", () => {
 
 }
 
-
 //FUNCION VACIAR EL CARRITO DE COMPRA
 
 function vaciarCarrito() {
@@ -624,7 +623,9 @@ function addLocalStorage(){
 
 function traerDeLocal(){
     const carroVuelta = localStorage.getItem("carrito")
-    carrito = JSON.parse(carroVuelta);
+    if (carroVuelta !== null) {
+        carrito = JSON.parse(carroVuelta);
+    }
     mostrarCarrito();
 }
 
