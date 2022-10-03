@@ -460,11 +460,23 @@ class producto {
 }
 }
 
-const p1 = new producto(1, "Motherboard", "img/mother.png", "asus B450", 20000);
-const p2 = new producto(2, "Procesador", "img/procesador.png", "ryzen 5600x", 50000);
-const p3 = new producto(3, "Memoria ram", "img/ram.png", "g-skill trident z 16gb", 25000);
-const p4 = new producto(4, "Disco rigido", "img/discosolido.png", "NVMe samsung 970 evo 1tb", 45000);
-const p5 = new producto(5, "Placa video", "img/placadevideo.png", "asus RTX 3080ti", 330000);
+const p1 = new producto(1, "Print 001", "img/streetcolor (1).jpg", "Rostro", 10000);
+const p2 = new producto(2, "Print 002", "img/streetcolor (2).jpg", "Nudo", 10000);
+const p3 = new producto(3, "Print 003", "img/streetcolor (3).jpg", "Mirada", 13000);
+const p4 = new producto(4, "Print 004", "img/streetcolor (4).jpg", "Mensaje", 20000);
+const p5 = new producto(5, "Print 005", "img/streetcolor (5).jpg", "Naturaleza", 20000);
+const p6 = new producto(6, "Print 006", "img/streetcolor (6).jpg", "Trofeo", 20000);
+const p7 = new producto(7, "Print 007", "img/streetcolor (7).jpg", "Arruinado", 10000);
+const p8 = new producto(8, "Print 008", "img/streetcolor (8).jpg", "Colapso", 7000);
+const p9 = new producto(9, "Print 009", "img/streetcolor (9).jpg", "Reptiliano", 20000);
+const p10 = new producto(10, "Print 010", "img/streetcolor (10).jpg", "Torso", 10000);
+const p11 = new producto(11, "Print 011", "img/streetcolor (11).jpg", "Presión", 7000);
+const p12 = new producto(12, "Print 012", "img/streetcolor (12).jpg", "Soporte", 7000);
+const p13 = new producto(13, "Print 013", "img/streetcolor (13).jpg", "Carne", 13000);
+const p14 = new producto(14, "Print 014", "img/streetcolor (14).jpg", "Negado", 20000);
+const p15 = new producto(15, "Print 015", "img/streetcolor (15).jpg", "Juguetes", 13000);
+const p16 = new producto(16, "Print 016", "img/streetcolor (16).jpg", "Sub-estructuras", 23000);
+
 
 
 //CONSTRUCTOR - AGREGADO DE ELEMENTO CANTIDAD - CUANDO PUSHEAMOS AL CARRITO 
@@ -479,7 +491,8 @@ class ProductoEnCarrito {
 //ARRAY DE OBJETOS ("BASE DE DATOS")
 
 const productos = [];
-    productos.push(p1, p2, p3, p4, p5);
+
+productos.push(p1, p2, p3, p4, p5, p6, p7, p8, p9, p10, p11, p12, p13, p14, p15, p16);
 
 
 //DECLARAMOS ARRAY DE CARRITO VACIO
@@ -493,12 +506,13 @@ const mostrarProductos = (productos) => {
 const seccionProductos = document.getElementById("seccion-productos");
     productos.forEach((producto) => {
         const card = document.createElement("card");
-        card.innerHTML += `<div class="card border border-success" style="width: 18rem;">
-            <img src="${producto.img}" class="card-img-top" alt="...">
+        card.classList.add('col-12', 'col-md-4', 'col-xl-3', 'd-flex', 'justify-content-center')
+        card.innerHTML += `<div class="card border border-dark m-2 align-items-center bg-light" style="width: 18rem;">
+            <img src="${producto.img}" class="card-img-top p-3" alt="imagenes de la calle">
             <div class="card-body">
             <h5 class="card-title">${producto.componente}: ${producto.nombre}</h5>
             <p class="card-text">$${producto.precio}</p>
-            <a class="btn btn-success" id="button${producto.id}">Agregar al Carrito</a>
+            <a class="btn btn-info" id="button${producto.id}">Agregar al Carrito</a>
             </div>
         </div>`;
 
@@ -545,8 +559,8 @@ carrito.forEach((p) => {
             <div>
               <p>${p.cantidad} x ${p.producto.nombre}: $${p.producto.precio * p.cantidad}</p>
 
-            <button class="carrito-add-one" onclick="sumarUnoAProducto(${p.producto.id})">+</button>
-            <button class="carrito-remove-one" onclick="restarUnoAProducto(${p.producto.id})">-</button>
+            <button class="carrito-add-one btn btn-success" onclick="sumarUnoAProducto(${p.producto.id})">+</button>
+            <button class="carrito-remove-one ms-1 btn btn-danger" onclick="restarUnoAProducto(${p.producto.id})">-</button>
 
             </div>
             `;
@@ -555,12 +569,38 @@ carrito.forEach((p) => {
 });
 
 section.innerHTML += `<p>Total: ${total}</p>`;
-section.innerHTML += `<a class="btn btn-danger" id="buttonVaciar">vaciar carrito</a>`
+section.innerHTML += `<a class="btn btn-success" id="finalizarCompra">Finalizar Compra</a>`
+section.innerHTML += `<a class="btn btn-danger ms-2" id="buttonVaciar">Vaciar Carrito</a>`
+
 
 const buttonV = document.querySelector('#buttonVaciar')
 buttonV.addEventListener("click", () => {
     vaciarCarrito();
     addLocalStorage();
+});
+
+const buttonF = document.querySelector('#finalizarCompra')
+
+buttonF.addEventListener("click", () => {
+    Swal.fire({
+        title: 'Esta seguro/a que quiere finalizar su compra?',
+        icon: 'question',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'si estoy seguro!'
+    }).then((result) => {
+        if (result.isConfirmed) {
+            vaciarCarrito();
+            addLocalStorage();
+            Swal.fire(
+            'Compra Finalizada',
+            'Muchas Gracias por confiar en Nosotros',
+            'success'
+        )
+        }
+    })
+    
 });
 
 }
@@ -576,17 +616,14 @@ function vaciarCarrito() {
 //FUNCION PARA AGREGAR UNA UNIDAD DE PRODUCTO
 
 function productoAdd(p) {
-        p.cantidad += 1;
+    p.cantidad ++;
 }
 
 
 //FUNCION PARA QUITAR UNA UNIDAD DE PRODUCTO
 
 function subtract(p) {
-        if (p.cantidad == 0) {
-        return;
-        }
-        p.cantidad -= 1;
+    p.cantidad !==0 && p.cantidad--;
 }
 
 
@@ -615,6 +652,7 @@ function restarUnoAProducto(id) {
 mostrarCarrito();
 }
 
+
 //FUNCIONES LOCAL STORAGE (JSON)
 function addLocalStorage(){
     const carritoStr = JSON.stringify(carrito)
@@ -623,9 +661,7 @@ function addLocalStorage(){
 
 function traerDeLocal(){
     const carroVuelta = localStorage.getItem("carrito")
-    if (carroVuelta !== null) {
-        carrito = JSON.parse(carroVuelta);
-    }
+    carroVuelta !== null && (carrito = JSON.parse(carroVuelta));
     mostrarCarrito();
 }
 
