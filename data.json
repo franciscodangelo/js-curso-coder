@@ -1,0 +1,114 @@
+[
+  {
+    "id": 1,
+    "nombre": "Print 001",
+    "img": "./img/streetcolor (1).jpg",
+    "detalle": "Rostro",
+    "precio": 10000
+  },
+  {
+    "id": 2,
+    "nombre": "Print 002",
+    "img": "./img/streetcolor (2).jpg",
+    "detalle": "Nudo",
+    "precio": 10000
+  },
+  {
+    "id": 3,
+    "nombre": "Print 003",
+    "img": "./img/streetcolor (3).jpg",
+    "detalle": "Mirada",
+    "precio": 13000
+  },
+  {
+    "id": 4,
+    "nombre": "Print 004",
+    "img": "./img/streetcolor (4).jpg",
+    "detalle": "Mensaje",
+    "precio": 20000
+  },
+  {
+    "id": 5,
+    "nombre": "Print 005",
+    "img": "./img/streetcolor (5).jpg",
+    "detalle": "Naturaleza",
+    "precio": 20000
+  },
+  {
+    "id": 6,
+    "nombre": "Print 006",
+    "img": "img/streetcolor (6).jpg",
+    "detalle": "Trofeo",
+    "precio": 10000
+  },
+  {
+    "id": 7,
+    "nombre": "Print 007",
+    "img": "./img/streetcolor (7).jpg",
+    "detalle": "Arruinado",
+    "precio": 10000
+  },
+  {
+    "id": 8,
+    "nombre": "Print 008",
+    "img": "./img/streetcolor (8).jpg",
+    "detalle": "Colapso",
+    "precio": 7000
+  },
+  {
+    "id": 9,
+    "nombre": "Print 009",
+    "img": "./img/streetcolor (9).jpg",
+    "detalle": "Reptiliano",
+    "precio": 20000
+  },
+  {
+    "id": 10,
+    "nombre": "Print 010",
+    "img": "./img/streetcolor (10).jpg",
+    "detalle": "Torso",
+    "precio": 10000
+  },
+  {
+    "id": 11,
+    "nombre": "Print 011",
+    "img": "./img/streetcolor (11).jpg",
+    "detalle": "Presión",
+    "precio": 7000
+  },
+  {
+    "id": 12,
+    "nombre": "Print 012",
+    "img": "./img/streetcolor (12).jpg",
+    "detalle": "Soporte",
+    "precio": 7000
+  },
+  {
+    "id": 13,
+    "nombre": "Print 013",
+    "img": "./img/streetcolor (13).jpg",
+    "detalle": "Carne",
+    "precio": 13000
+  },
+  {
+    "id": 14,
+    "nombre": "Print 014",
+    "img": "./img/streetcolor (14).jpg",
+    "detalle": "Negado",
+    "precio": 20000
+  },
+  {
+    "id": 15,
+    "nombre": "Print 015",
+    "img": "./img/streetcolor (15).jpg",
+    "detalle": "Juguetes",
+    "precio": 13000
+  },
+  {
+    "id": 16,
+    "nombre": "Print 016",
+    "img": "./img/streetcolor (16).jpg",
+    "detalle": "Sub-estructuras",
+    "precio": 23000
+  }
+]
